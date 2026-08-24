@@ -1,0 +1,133 @@
+# 반드시 이해 해야할것들 
+## JAVA
+```
+반드시 이해
+클래스 / 객체
+생성자
+상속
+오버라이딩
+인터페이스
+추상 클래스
+다형성
+접근제어자
+static
+예외처리
+컬렉션
+제네릭
+람다
+Stream
+```
+-> 이 코드가 왜 가능한지 설명할줄 알아야함
+
+## Servlet/JSP
+```
+반드시 이해
+HTTP Request / Response
+GET / POST
+Servlet
+doGet()
+doPost()
+request
+response
+session
+ServletContext
+setAttribute()
+getAttribute()
+forward
+redirect
+JSP EL
+JSTL
+DAO / VO
+```
+
+## SQL/DB
+```
+SELECT
+ ↓
+WHERE
+ ↓
+JOIN
+ ↓
+GROUP BY
+ ↓
+HAVING
+ ↓
+SUBQUERY
+ ↓
+INSERT/UPDATE/DELETE
+ ↓
+PK/FK
+ ↓
+INDEX
+ ↓
+TRANSACTION  
+이후 자바 연결
+```
+
+## Spring Boot 
+```
+Spring 기본
+ ↓
+Spring Boot
+ ↓
+Spring MVC
+ ↓
+REST API
+ ↓
+Spring Data JPA
+ ↓
+Spring Security
+```
+## REST API / JSON
+```
+GET     조회
+POST    생성
+PUT     수정
+DELETE  삭제 
+ex_ {
+  "title": "회의 준비",
+  "priority": "HIGH"
+}
+```
+## Docker
+```
+docker compose up ->  Spring Boot
+                      MySQL
+                      Redis
+```
+
+## AWS 
+```
+Linux
+ ↓
+EC2
+ ↓
+RDS
+ ↓
+S3
+ ↓
+VPC
+ ↓
+ALB
+ ↓
+CloudWatch
+
+이후 
+
+GitHub
+ ↓
+GitHub Actions
+ ↓
+Docker
+ ↓
+AWS     배포까지 
+```
+
+## DevOps 
+```
+Terraform
+Kubernetes
+Prometheus
+Grafana
+```
+### 대충 정리 해보았는데, 기초 적립부터 천천히 가보자 

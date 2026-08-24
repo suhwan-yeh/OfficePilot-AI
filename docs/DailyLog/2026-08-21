@@ -1,0 +1,170 @@
+# 2026-08-21 DailyLog
+
+## 📚 오늘 공부한 내용
+
+### 1. 서블릿 포워드 기능
+
+서블릿에서 다른 서블릿이나 JSP로 요청을 전달하는 기능을 학습했다.
+
+대표적으로 `RequestDispatcher`를 사용한다.
+
+```java
+RequestDispatcher dispatcher =
+    request.getRequestDispatcher("result.jsp");
+
+dispatcher.forward(request, response);
+```
+
+#### 핵심
+
+`forward()`는 현재 요청을 다른 리소스로 전달한다.
+
+```text
+Client
+  ↓ Request
+Servlet
+  ↓ forward()
+JSP / 다른 Servlet
+```
+
+클라이언트가 새로운 요청을 보내는 것이 아니라 **서버 내부에서 요청을 전달**한다.
+
+따라서 같은 `request`와 `response` 객체를 사용할 수 있다.
+
+---
+
+### 2. 서블릿 바인딩 기능
+
+서블릿에서 처리한 데이터를 `request`, `session`, `application` 등의 객체에 저장하고 다른 JSP나 서블릿에서 사용할 수 있도록 하는 기능을 학습했다.
+
+예:
+
+```java
+request.setAttribute("name", "Suhwan");
+```
+
+JSP에서:
+
+```jsp
+<%= request.getAttribute("name") %>
+```
+
+#### 핵심
+
+```text
+Servlet
+  ↓
+setAttribute()
+  ↓
+request/session/application
+  ↓
+JSP
+  ↓
+getAttribute()
+```
+
+즉, **서블릿에서 처리한 데이터를 다음 단계로 전달하기 위한 방법**이다.
+
+---
+
+## 🔗 Forward + Binding 연결
+
+두 개념은 함께 사용되는 경우가 많다.
+
+```java
+request.setAttribute("message", "OfficePilot 실행 완료");
+
+RequestDispatcher dispatcher =
+    request.getRequestDispatcher("result.jsp");
+
+dispatcher.forward(request, response);
+```
+
+처리 과정:
+
+```text
+사용자 요청
+    ↓
+Servlet
+    ↓
+데이터 처리
+    ↓
+request.setAttribute()
+    ↓
+forward()
+    ↓
+JSP
+    ↓
+getAttribute()
+    ↓
+화면 출력
+```
+
+### 한 줄 정리
+
+> **Binding = 데이터를 담는다.**
+> **Forward = 다음 화면으로 전달한다.**
+
+---
+
+## 💡 OfficePilot-AI 적용 아이디어
+
+현재 학습한 Servlet의 구조를 향후 OfficePilot-AI의 **업무 처리 → 결과 화면 전달 구조**에 적용할 수 있다.
+
+예를 들어 사용자가 업무 자동화 요청을 보내면:
+
+```text
+사용자
+  ↓
+업무 요청
+  ↓
+Servlet / Controller
+  ↓
+업무 데이터 처리
+  ↓
+AI API 또는 DB 연동
+  ↓
+request에 결과 저장
+  ↓
+JSP로 forward
+  ↓
+결과 화면 출력
+```
+
+예를 들어 AI가 이메일 내용을 요약했다면:
+
+```java
+request.setAttribute("summary", aiSummary);
+```
+
+이후 JSP에서 요약 결과를 출력할 수 있다.
+
+향후 Spring Boot로 전환하면 현재 Servlet에서 학습한 **요청 → 처리 → 데이터 전달 → 화면/응답** 구조를 Controller와 Service 구조로 확장할 수 있을 것으로 생각된다.
+
+---
+
+## 🧠 오늘의 핵심 개념
+
+| 개념                  | 역할                 |
+| ------------------- | ------------------ |
+| `RequestDispatcher` | 다른 리소스로 요청 전달      |
+| `forward()`         | 서버 내부에서 요청 전달      |
+| `setAttribute()`    | 데이터 저장             |
+| `getAttribute()`    | 저장된 데이터 조회         |
+| Request Scope       | 하나의 요청 안에서 데이터 공유  |
+| Session Scope       | 사용자 세션 동안 데이터 공유   |
+| Application Scope   | 애플리케이션 전체에서 데이터 공유 |
+
+### 오늘의 핵심
+
+> **Servlet은 데이터를 처리하고, Binding으로 데이터를 저장한 뒤, Forward를 통해 JSP로 전달할 수 있다.**
+
+---
+
+## 📝 오늘의 정리 ㄱㄱ
+
+오늘은 Servlet에서 단순히 요청을 처리하는 것뿐만 아니라, **처리한 데이터를 다른 화면으로 전달하는 방법**을 학습했다.
+
+특히 `setAttribute()`와 `forward()`를 함께 사용하면 서버에서 데이터를 처리한 후 JSP에서 결과를 출력할 수 있다는 점을 이해했다.
+
+앞으로 Spring MVC를 학습할 때도 오늘 배운 Servlet의 **요청 → 처리 → 데이터 전달 → 응답** 흐름과 연결해서 이해해볼 예정이다.
